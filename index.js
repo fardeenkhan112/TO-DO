@@ -11,11 +11,16 @@ function add() {
   deleteBtn.onclick = function() {  
   li.remove();}
   li.appendChild(deleteBtn);
-  li.onclick = function () {
-  li.classList.toggle("completed");
-  saveTasks();};
   document.getElementById("task-list").appendChild(li);
+  saveData();
   document.getElementById("task-input").value = "";
 }
 function toggleDark() {
 document.body.classList.toggle("dark");}
+
+function saveData() {
+  var inputValue = document.getElementById("task-input").value;
+  var todoData = JSON.parse(localStorage.getItem("todo")) || [];
+  todoData.push(inputValue);
+  localStorage.setItem("todo", JSON.stringify(todoData));
+}
